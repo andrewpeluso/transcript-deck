@@ -1,0 +1,100 @@
+:root {
+  color-scheme: dark;
+  --bg: #161b18;
+  --surface: #222924;
+  --line: #404941;
+  --muted: #b6c0b5;
+  --ink: #f5f5eb;
+  --accent: #cced98;
+  --paper: #f4f2e8;
+  --paper-ink: #252b22;
+  --serif: Iowan Old Style, Palatino Linotype, Book Antiqua, Palatino, Georgia, serif;
+  --mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+html { scroll-behavior: smooth }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1rem/1.55 system-ui, sans-serif }
+.shell { width: min(72rem, calc(100% - 6rem)); margin-inline: auto }
+a { color: inherit; text-underline-offset: .22em }
+button { font: inherit; color: inherit; cursor: pointer }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, pre:focus-visible { outline: 3px solid #93c749; outline-offset: 4px }
+.top { display: flex; align-items: center; justify-content: space-between; min-height: 5rem; border-bottom: 1px solid var(--line) }
+.brand { display: flex; align-items: center; gap: .65rem; text-decoration: none; font-weight: 640 }
+nav { display: flex; gap: clamp(1rem, 3vw, 2.25rem); color: var(--muted) }
+nav a { text-decoration: none }
+nav a:hover, .foot a:hover { color: var(--accent) }
+.hero { display: grid; grid-template-columns: 1.04fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); padding-block: clamp(4.25rem, 8vw, 7.5rem) }
+h1, .install h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.067em }
+h1 { margin: 0; font-size: clamp(3.6rem, 7.6vw, 7.4rem); line-height: .92 }
+h1 span { color: var(--accent) }
+.intro p { color: var(--muted); margin: 1.6rem 0 1.8rem; max-width: 31ch; font-size: clamp(1.08rem, 2vw, 1.26rem) }
+.actions { display: flex; gap: .65rem; flex-wrap: wrap }
+.button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; border-radius: .45rem; padding: .73rem 1.05rem; min-height: 2.85rem; font-weight: 640; text-decoration: none }
+.button:hover { filter: brightness(.89) }
+.primary { background: var(--accent); color: #18210d }
+.outline { border-color: #687568 }
+.example { background: var(--surface); border: 1px solid var(--line); border-radius: .8rem; overflow: hidden; box-shadow: 0 1.6rem 3.5rem #0004 }
+.example-top, .example-bottom { display: flex; justify-content: space-between; align-items: center; gap: .55rem; padding: .75rem .9rem }
+.example-top h2 { font: 500 .84rem/1.25 var(--mono); margin: 0; color: #d6dfd4 }
+.example-top h2 span { color: #91a08f }
+.preview-buttons { display: flex; align-items: center; gap: .15rem; background: #141a16; border: 1px solid #485249; padding: .17rem; border-radius: .35rem }
+.preview-buttons button { border: 0; background: transparent; border-radius: .22rem; padding: .34rem .59rem; font-size: .82rem; color: #cbd3c9 }
+.preview-buttons button[aria-pressed="true"] { background: #455843; color: white }
+.sheet { margin: 0 .7rem; background: var(--paper); color: var(--paper-ink); border-radius: .36rem; padding: 1.35rem clamp(1rem, 2.3vw, 1.7rem); min-height: 22.4rem; height: 22.4rem; overflow-y: auto }
+.sheet-title { margin: 0 0 .75rem; font: 400 clamp(1.75rem, 3vw, 2.5rem)/1.05 var(--serif); letter-spacing: -.045em }
+.sheet section { border-top: 1px solid #d5d9cd; padding: .7rem 0 .62rem }
+.sheet h3 { font-size: 1rem; margin: 0 0 .28rem }
+.sheet section div { display: grid; grid-template-columns: 3.25rem 1fr; align-items: baseline }
+.sheet section p { margin: 0; font-size: .91rem; line-height: 1.4 }
+.time { color: #385322; width: fit-content; font: 650 .83rem/1.35 var(--mono) }
+.raw { font: .83rem/1.62 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere }
+.example-bottom { padding: .62rem .9rem }
+.example-bottom a { color: var(--muted); font-size: .76rem; text-align: right }
+.demo { display: flex; align-items: center; gap: .48rem; padding: .25rem .28rem; border: 0; background: transparent; color: var(--accent); font-size: .82rem; text-align: left }
+.demo span:first-child { width: 0; height: 0; border-left: .45rem solid; border-block: .29rem solid transparent }
+.demo.playing span:first-child { width: .49rem; height: .62rem; border: 0; border-inline: .16rem solid }
+.demo-progress { height: 3px; background: var(--surface) }
+.demo-progress div { background: var(--accent); height: 100%; width: 0 }
+.demo-progress .running { width: 100%; transition: width 12s linear }
+.install { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); padding: 3.4rem 0 4.25rem; border-top: 1px solid var(--line); scroll-margin-top: 1.2rem }
+.install h2 { margin: 0; font-size: clamp(2.55rem, 5vw, 4.5rem); line-height: 1 }
+.install-intro p { color: var(--muted); max-width: 32ch }
+summary { cursor: pointer; color: var(--accent) }
+details p { font-size: .94rem }
+.setup { align-self: start }
+fieldset { display: flex; flex-wrap: wrap; gap: .5rem; border: 0; margin: 0 0 1.2rem; padding: 0 }
+legend, .instruction h3 { font-size: .94rem; font-weight: 620; margin: 0 0 .45rem }
+fieldset label { display: flex; align-items: center; gap: .44rem; padding: .38rem .7rem; border: 1px solid #697669; border-radius: .35rem; cursor: pointer }
+fieldset label:has(input:checked) { border-color: var(--accent); background: #293726 }
+input { accent-color: var(--accent); margin: 0 }
+.instruction { margin-bottom: .95rem }
+.code-box { display: flex; align-items: center; gap: .8rem; background: var(--surface); border: 1px solid var(--line); border-radius: .45rem; padding: .67rem .65rem .67rem .85rem }
+.code-box code { flex: 1; min-width: 0; overflow-wrap: anywhere; color: #dfecd9; font: .86rem/1.5 var(--mono) }
+.copy { border: 1px solid #697669; padding: .35rem .55rem; min-width: 3.5rem; border-radius: .3rem; background: #2f3b2e; font-size: .86rem }
+.copy:hover { border-color: var(--accent) }
+.hint, .foot { color: var(--muted); font-size: .91rem }
+.foot { border-top: 1px solid var(--line); padding-block: 1.35rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem }
+.foot p { margin: 0 }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap }
+@media (max-width: 50rem) {
+  .shell { width: min(36rem, calc(100% - 3rem)) }
+  .hero, .install { grid-template-columns: 1fr }
+  .hero { gap: 2rem; padding-block: 3rem }
+  .desktop { display: none }
+  .sheet { min-height: 20.4rem; height: 20.4rem }
+  .install { padding-block: 2.5rem }
+}
+@media (max-width: 25rem) {
+  .shell { width: calc(100% - 2rem) }
+  .top { min-height: 4rem }
+  .example-top, .example-bottom { padding-inline: .65rem }
+  .example-top h2 { font-size: .72rem }
+  .example-bottom a { font-size: .66rem }
+  .preview-buttons button { padding-inline: .4rem }
+  .sheet { padding-inline: .9rem; margin-inline: .5rem; height: 21.3rem }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+  .demo-progress .running { transition: none }
+}

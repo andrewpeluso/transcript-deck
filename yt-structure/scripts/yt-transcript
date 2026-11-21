@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+if ! command -v node >/dev/null 2>&1; then
+  echo 'Node.js 22.20+ is required. Install it from https://nodejs.org/download, then rerun the command.' >&2
+  exit 3
+fi
+exec node "$(dirname "$0")/transcript.mjs" "$@"

@@ -1,0 +1,11 @@
+{
+  "name": "transcript-deck",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22.20.0"},
+  "scripts": {
+    "build": "node site/build.mjs",
+    "test": "node --test"
+  }
+}
