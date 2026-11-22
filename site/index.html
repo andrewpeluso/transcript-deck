@@ -26,22 +26,25 @@
       <div class="intro">
         <h1>YouTube transcripts for your AI agent<span>.</span></h1>
         <p>Transcript Deck is a free skill for Codex and Claude Code. It turns a YouTube link into a readable Markdown file with topic headings and timestamps that jump to the video.</p>
-        <div class="actions"><button id="start" class="button primary" type="button" data-copy="prompt" data-position="hero" data-copy-status="hero-copy-status">Copy starter prompt</button></div>
+        <div class="actions">
+          <button id="start" class="button primary" type="button" data-copy="prompt" data-position="hero" data-copy-status="hero-copy-status">Copy starter prompt</button>
+          <a class="walkthrough-shortcut" id="walkthrough-shortcut" href="#walkthrough-heading">See how it works</a>
+        </div>
         <p class="hero-hint" id="hero-copy-status" role="status">Paste into Codex or Claude Code. Your agent handles setup.</p>
       </div>
       <section id="example" class="example" aria-labelledby="example-title">
         <div class="example-top">
-          <h2 id="example-title">Inbox Zero in 17 Minutes</h2>
+          <p>Inbox Zero in 17 Minutes</p>
           <a href="https://www.youtube.com/watch?v=uXdEVeoGRRc">Tiago Forte</a>
         </div>
         <div class="sheet">
-          <p class="sheet-title">What should I do with all these newsletters?</p>
+          <h2 class="sheet-title" id="example-title">What should I do with all these newsletters?</h2>
           <p class="sheet-note">Recap from the transcript</p>
           <section><h3>Unsubscribe first</h3><div><a class="time" href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=159s" target="_blank" rel="noopener" aria-label="2:39 in the original video (opens in a new tab)">2:39</a><p>Start with recurring emails you no longer want to receive.</p></div></section>
           <section><h3>Make a reading tab</h3><div><a class="time" href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=207s" target="_blank" rel="noopener" aria-label="3:27 in the original video (opens in a new tab)">3:27</a><p>Filter newsletters you want to keep into a separate place to read later.</p></div></section>
         </div>
         <details class="walkthrough">
-          <summary>See how it works</summary>
+          <summary id="walkthrough-heading">See how it works</summary>
           <p class="demo-context">I used this video to decide what to unsubscribe from and where to put the newsletters I still wanted to read. <span>— Andrew Peluso</span></p>
           <ol>
             <li><a href="#start">Copy the starter prompt.</a> It already includes Tiago Forte’s video link.</li>
