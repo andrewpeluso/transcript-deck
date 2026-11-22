@@ -17,45 +17,49 @@
 <body>
   <header class="shell top">
     <a class="brand" href="/" aria-label="Transcript Deck home"><img src="/mark.svg" width="33" height="33" alt="">Transcript Deck</a>
-    <nav aria-label="Main"><a href="#install">Install</a><a href="https://github.com/andrewpeluso/transcript-deck">GitHub</a></nav>
+    <nav aria-label="Main"><a href="#install">Try it</a><a href="https://github.com/andrewpeluso/transcript-deck">GitHub</a></nav>
   </header>
   <main class="shell">
     <div class="hero">
       <div class="intro">
         <h1>YouTube to<br class="desktop"> Markdown<span>.</span></h1>
-        <p>Turn a video link into a transcript you can search, quote, and jump back into. A free skill for Codex and Claude Code.</p>
-        <div class="actions"><a class="button primary" href="#install">Install the skill</a><a class="button outline" href="/sample.md" download>Download sample</a></div>
+        <p>Turn a YouTube link into a readable transcript you can search and quote. Click a timestamp to jump back to the video.</p>
+        <div class="actions"><button class="button primary" type="button" data-copy="prompt">Copy starter prompt</button><a class="button outline" href="/sample.md" download>Download sample</a></div>
+        <p class="hero-hint">Paste it into Codex or Claude Code. Your agent handles setup.</p>
       </div>
       <section id="example" class="example" aria-labelledby="example-title">
         <div class="example-top">
-          <h2 id="example-title">Sintel <span>·</span> 1:47–2:36</h2>
+          <h2 id="example-title">Wanna Work Together? <span>·</span> 1:13–2:05</h2>
           <div class="preview-buttons" aria-label="Transcript view">
             <button type="button" data-view="raw" aria-pressed="false">Captions</button>
             <button type="button" data-view="clean" aria-pressed="true">Markdown</button>
           </div>
         </div>
         <div class="sheet" id="clean">
-          <p class="sheet-title">A conversation with<br> the gatekeeper</p>
-          <section><h3>The blade</h3><div><a class="time" href="https://www.youtube.com/watch?v=eRsGyueVLvQ&amp;t=107s" target="_blank" rel="noopener">1:47</a><p>This blade has a dark past. It has shed much innocent blood.</p></div></section>
-          <section><h3>The search</h3><div><a class="time" href="https://www.youtube.com/watch?v=eRsGyueVLvQ&amp;t=127s" target="_blank" rel="noopener">2:07</a><p>“What brings you to the land of the gatekeepers?”</p></div></section>
-          <section><h3>Traveling alone</h3><div><a class="time" href="https://www.youtube.com/watch?v=eRsGyueVLvQ&amp;t=148s" target="_blank" rel="noopener">2:28</a><p>A dangerous quest for a lone hunter.</p></div></section>
+          <p class="sheet-title">How Creative Commons<br> licenses work</p>
+          <section><h3>Share your work for reuse</h3><div><a class="time" href="https://www.youtube.com/watch?v=q0VzUigrb_g&amp;t=73s" target="_blank" rel="noopener">1:13</a><p>But sometimes full copyright is too restrictive.</p></div></section>
+          <section><h3>Choose what people can do</h3><div><a class="time" href="https://www.youtube.com/watch?v=q0VzUigrb_g&amp;t=93s" target="_blank" rel="noopener">1:33</a><p>“Will you allow commercial uses of your work?”</p></div></section>
+          <section><h3>Make your terms clear</h3><div><a class="time" href="https://www.youtube.com/watch?v=q0VzUigrb_g&amp;t=113s" target="_blank" rel="noopener">1:53</a><p>“You refine it so it works better for you.”</p></div></section>
         </div>
         <pre id="raw" class="sheet raw" aria-label="Source captions" tabindex="0" hidden><!-- raw-caption-preview --></pre>
-        <div class="example-bottom"><button class="demo" id="demo" type="button"><span aria-hidden="true"></span><span id="demo-label">Play 12-second demo</span></button><a href="https://durian.blender.org/about/">Blender Foundation · CC BY 3.0</a></div>
+        <div class="example-bottom"><button class="demo" id="demo" type="button"><span aria-hidden="true"></span><span id="demo-label">Play 12-second demo</span></button><a href="https://creativecommons.org/about/videos/wanna-work-together/">Creative Commons · CC BY 2.5</a></div>
         <div class="demo-progress" aria-hidden="true"><div id="demo-progress"></div></div>
       </section>
     </div>
     <section id="install" class="install" aria-labelledby="install-title">
       <div class="install-intro">
-        <h2 id="install-title">Try it on a video.</h2>
-        <p>You’ll need your agent, <a href="https://nodejs.org/en/download">Node.js 22.20+</a>, and an up-to-date <a href="https://github.com/yt-dlp/yt-dlp#installation">yt-dlp</a>. Supports macOS and Linux.</p>
-        <details><summary>Install yt-dlp</summary><p>On macOS, run <code>brew install yt-dlp</code>. On Linux, run <code>pipx install "yt-dlp[default]"</code>. Update an existing install if YouTube retrieval fails.</p></details>
+        <h2 id="install-title">Try it in your agent.</h2>
+        <p>Save a webinar for research, pull a quote with its timestamp, or keep a tutorial as a searchable reference.</p>
+        <a class="skill-link" href="/skill.md">Read the skill instructions</a>
       </div>
       <div class="setup">
-        <fieldset><legend>Your agent</legend><label><input type="radio" name="agent" value="codex" checked>Codex</label><label><input type="radio" name="agent" value="claude-code">Claude Code</label></fieldset>
-        <div class="instruction"><h3>Run in your terminal</h3><div class="code-box"><code id="install-command">npx skills add andrewpeluso/transcript-deck --skill yt-structure -g -a codex</code><button class="copy" type="button" data-copy="install-command" aria-label="Copy install command">Copy</button></div></div>
-        <div class="instruction"><h3>Open a new agent session and paste</h3><div class="code-box"><code id="prompt">Use the yt-structure skill to turn https://www.youtube.com/watch?v=eRsGyueVLvQ into a Markdown transcript and link me to the file.</code><button class="copy" type="button" data-copy="prompt" aria-label="Copy sample prompt">Copy</button></div></div>
-        <p class="hint">Use your own video link next. If captions are unavailable, supply a VTT, SRT, or pasted transcript.</p>
+        <div class="instruction"><h3>Paste into Codex or Claude Code</h3><div class="code-box"><code id="prompt">Use Transcript Deck (https://transcriptdeck.com/skill.md) to turn https://www.youtube.com/watch?v=q0VzUigrb_g into a Markdown file with timestamped sections. Run the setup if needed and give me the file.</code><button class="copy" type="button" data-copy="prompt" aria-label="Copy starter prompt text">Copy</button></div></div>
+        <p class="hint">Start with the example or replace the video link with your own. If captions are unavailable, share a caption file or paste the transcript.</p>
+        <details><summary>Setup details and optional install</summary>
+          <p>The starter prompt works in a local macOS or Linux workspace with shell and network access. Your agent may ask permission to download its tools the first time.</p>
+          <p>For repeat use, install the skill with the Skills CLI.</p>
+          <div class="code-box"><code id="install-command">npx skills add andrewpeluso/transcript-deck --skill yt-structure</code><button class="copy" type="button" data-copy="install-command" aria-label="Copy optional install command">Copy</button></div>
+        </details>
         <p id="copy-status" class="sr-only" role="status"></p>
       </div>
     </section>

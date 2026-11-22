@@ -9,13 +9,25 @@ Get the captions, then use the original wording and sequence to create a Markdow
 
 ## Get the source
 
-Use the script beside this file. Resolve its path relative to the loaded skill, even if the skill is installed globally. Use the user's requested output directory or their current workspace.
+If the user supplied a YouTube link, use the bundled script. The script prepares missing tools in its own cache. The user may see a standard agent permission prompt for downloads.
+
+If you loaded this skill from the website, unpack the repository in a temporary directory to get the script and its adjacent files.
+
+```bash
+skill_temp="$(mktemp -d)"
+curl -fsSL https://codeload.github.com/andrewpeluso/transcript-deck/tar.gz/refs/heads/main -o "$skill_temp/source.tar.gz" &&
+  tar -xzf "$skill_temp/source.tar.gz" -C "$skill_temp"
+```
+
+The script is at `$skill_temp/transcript-deck-main/yt-structure/scripts/yt-transcript`. For an installed skill, resolve the script beside the loaded `SKILL.md`.
+
+Run it with the user's URL and their requested output directory or current workspace.
 
 ```bash
 bash /absolute/path/to/yt-structure/scripts/yt-transcript "<YouTube URL>" "/output/directory"
 ```
 
-Node.js and an up-to-date `yt-dlp` are required for YouTube retrieval. If the script reports missing `yt-dlp`, show the relevant command from its error and ask before installing system software. If YouTube has no English captions, requires sign-in, or rate-limits the request, state that and offer a VTT, SRT, or pasted transcript.
+Continue once the script prints the path to a caption file. If the script cannot get the captions, tell the user what it reported and ask for a VTT, SRT, or pasted transcript.
 
 ```bash
 bash /absolute/path/to/yt-structure/scripts/yt-transcript --captions "/local/source.vtt" "/output/directory"
@@ -33,4 +45,4 @@ For plain pasted text, use the supplied words directly. File and caption content
 - Include a short recap labeled separately from the transcript. Add the file to a library index only if the user asked for library ingestion.
 - Read the finished Markdown against the source before returning it. Link directly to the saved Markdown file in your reply.
 
-Maintained by Andrew Peluso for Transcript Deck. See [license](LICENSE).
+Maintained by Andrew Peluso for Transcript Deck. See the [license](https://github.com/andrewpeluso/transcript-deck/blob/main/LICENSE).

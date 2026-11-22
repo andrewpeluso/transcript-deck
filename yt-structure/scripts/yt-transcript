@@ -1,7 +1,92 @@
 #!/usr/bin/env bash
 set -euo pipefail
-if ! command -v node >/dev/null 2>&1; then
-  echo 'Node.js 22.20+ is required. Install it from https://nodejs.org/download, then rerun the command.' >&2
+
+node_release=v22.23.5
+caption_release=2026.10.26
+cache_location="${TRANSCRIPT_DECK_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/transcript-deck}"
+platform="$(uname -s)-$(uname -m)"
+
+checked_download() {
+  local url="$1" destination="$2" expected="$3" actual
+  curl --proto '=https' --proto-redir '=https' -fsSL --retry 2 --connect-timeout 10 --max-time 120 -o "$destination" "$url" || return 1
+  if command -v sha256sum >/dev/null 2>&1; then
+    actual="$(sha256sum "$destination")" || return 1
+  else
+    actual="$(shasum -a 256 "$destination")" || return 1
+  fi
+  if [[ "${actual%% *}" != "$expected" ]]; then
+    echo 'Transcript Deck stopped because a setup download failed its checksum.' >&2
+    return 1
+  fi
+}
+
+prepare_node() (
+  set -e
+  if command -v node >/dev/null 2>&1 && node -e 'const [major, minor] = process.versions.node.split(".").map(Number); process.exit(major > 22 || major === 22 && minor >= 20 ? 0 : 1)' >/dev/null 2>&1; then
+    command -v node
+    exit
+  fi
+  local machine hash archive target
+  case "$platform" in
+    Darwin-arm64) machine=darwin-arm64; hash=e7131995759b61a0170b646010d2ad35a5d37b4cb0d471f3e8317eac6f742f3d ;;
+    Darwin-x86_64) machine=darwin-x64; hash=c53383238206b9ae4db23c5d8a63645e2e753bec8ab51a49cc81939aa64e9422 ;;
+    Linux-aarch64|Linux-arm64) machine=linux-arm64; hash=8bd3dc69eee8f3f226315a80d7d1d4faccf217a4c8fae500168ac2e38f3bdba3 ;;
+    Linux-x86_64) machine=linux-x64; hash=c54118104acc524633b5abe106bbf44a53126ec8b4e5fa105cb92b5d7de8a1a1 ;;
+    *) echo "Automatic setup is unavailable for $platform." >&2; exit 1 ;;
+  esac
+  target="$cache_location/node-$node_release-$machine"
+  if [[ ! -x "$target" ]]; then
+    archive="node-$node_release-$machine"
+    mkdir -p "$cache_location" || exit 1
+    setup_dir="$(mktemp -d "$cache_location/setup-node.XXXXXXXX")" || exit 1
+    trap 'rm -rf -- "$setup_dir"' EXIT
+    echo 'Preparing the local Transcript Deck runtime…' >&2
+    checked_download "https://nodejs.org/dist/$node_release/$archive.tar.gz" "$setup_dir/archive.tar.gz" "$hash" || exit 1
+    tar -xOzf "$setup_dir/archive.tar.gz" "$archive/bin/node" > "$setup_dir/node" || exit 1
+    chmod 755 "$setup_dir/node" || exit 1
+    mv -f "$setup_dir/node" "$target" || exit 1
+  fi
+  "$target" --version >/dev/null || exit 1
+  printf '%s\n' "$target"
+)
+
+prepare_downloader() (
+  set -e
+  local asset hash target installed
+  installed="$(yt-dlp --version 2>/dev/null || true)"
+  if [[ "$installed" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2} && ( "$installed" == "$caption_release"* || "$installed" > "$caption_release" ) ]]; then
+    command -v yt-dlp
+    exit
+  fi
+  case "$platform" in
+    Darwin-arm64|Darwin-x86_64) asset=yt-dlp_macos; hash=0f922c15ccc0b83eefa1c8bc9104e434318c4bf16e408e1ee93b7745a6efe0aa ;;
+    Linux-x86_64) asset=yt-dlp_linux; hash=767ba9dce7052aa196f8b12652f433d76de128ba168966fa84b6394d5e6c6795 ;;
+    Linux-aarch64|Linux-arm64) asset=yt-dlp_linux_aarch64; hash=e87e9533e89fe5889abaa21f5114dfe7756d6aa6219b83551add04d48b18e483 ;;
+    *) echo "Automatic setup is unavailable for $platform." >&2; exit 1 ;;
+  esac
+  target="$cache_location/$asset-$caption_release"
+  if [[ ! -x "$target" ]]; then
+    mkdir -p "$cache_location" || exit 1
+    setup_dir="$(mktemp -d "$cache_location/setup-captions.XXXXXXXX")" || exit 1
+    trap 'rm -rf -- "$setup_dir"' EXIT
+    echo 'Preparing the YouTube caption tool…' >&2
+    checked_download "https://github.com/yt-dlp/yt-dlp/releases/download/$caption_release/$asset" "$setup_dir/yt-dlp" "$hash" || exit 1
+    chmod 755 "$setup_dir/yt-dlp" || exit 1
+    mv -f "$setup_dir/yt-dlp" "$target" || exit 1
+  fi
+  "$target" --version >/dev/null || exit 1
+  printf '%s\n' "$target"
+)
+
+node_path="$(prepare_node)" || {
+  echo 'Transcript Deck could not prepare its runtime. You can paste an existing transcript into your agent.' >&2
   exit 3
+}
+if [[ $# -gt 0 && "$1" != -* ]]; then
+  TRANSCRIPT_DECK_YTDLP="$(prepare_downloader)" || {
+    echo 'Transcript Deck could not prepare the caption tool. Try again or supply captions as VTT, SRT, or text.' >&2
+    exit 3
+  }
+  export TRANSCRIPT_DECK_YTDLP
 fi
-exec node "$(dirname "$0")/transcript.mjs" "$@"
+exec "$node_path" "$(dirname "$0")/transcript.mjs" "$@"

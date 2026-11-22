@@ -12,5 +12,6 @@ const metadata = origin ? `<link rel="canonical" href="${origin}/">\n  <meta pro
 await mkdir(fileURLToPath(dist('')), { recursive: true });
 await Promise.all([
   writeFile(dist('index.html'), homepage.replace('<!-- raw-caption-preview -->', () => escapeHtml(raw)).replace('<!-- canonical -->', metadata)),
+  copyFile(new URL('../yt-structure/SKILL.md', import.meta.url), dist('skill.md')),
   ...['style.css', 'mark.svg', 'main.js', 'sample.md', '_headers'].map(name => copyFile(site(name), dist(name))),
 ]);

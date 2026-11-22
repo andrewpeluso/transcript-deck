@@ -4,27 +4,19 @@ Turn a YouTube link into a Markdown transcript with topic headings and links to 
 
 [Try Transcript Deck](https://transcriptdeck.com/) · [Download the sample transcript](site/sample.md).
 
-## Install the skill
+## Try it in your agent
 
-Use Node.js 22.20 or newer and a current [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation) on macOS or Linux. For macOS, use `brew install yt-dlp`. On Linux, use `pipx install "yt-dlp[default]"`.
+Copy the starter prompt on [Transcript Deck](https://transcriptdeck.com/) into Codex or Claude Code. Your agent can fetch the skill and run its setup in a local macOS or Linux workspace with shell and network access. The script uses compatible tools already available and caches verified copies of the tools it needs otherwise. Browsing and downloads are subject to your agent’s normal permissions.
 
-**Codex**
-
-```sh
-npx skills add andrewpeluso/transcript-deck --skill yt-structure -g -a codex
-```
-
-**Claude Code**
+You can also install the skill for repeat use through the Skills CLI.
 
 ```sh
-npx skills add andrewpeluso/transcript-deck --skill yt-structure -g -a claude-code
+npx skills add andrewpeluso/transcript-deck --skill yt-structure
 ```
 
-Open a new session in your agent and paste this prompt.
+Open a new agent session and ask, “Use yt-structure to turn this YouTube link into Markdown.” Installing this edition in the same agent and scope replaces any earlier skill with the same name.
 
-> Use the yt-structure skill to turn https://www.youtube.com/watch?v=eRsGyueVLvQ into a Markdown transcript and link me to the file.
-
-Use your own link after the first run. The skill works with accessible English caption tracks. Supply a VTT, SRT, or pasted transcript if YouTube captions are unavailable. This identifier is shared with the upstream `yt-structure` release. Installing this edition in the same agent and scope replaces the previous edition.
+For videos without accessible English captions, provide a VTT, SRT, or pasted transcript.
 
 ## Develop and deploy
 
@@ -44,4 +36,4 @@ For rollback, open **Deploys** in [the Netlify project](https://app.netlify.com/
 
 ## License
 
-MIT. This edition is based on the upstream `yt-structure` skill, with the original copyright and license retained. The *Sintel* sample is credited in the document and licensed separately under CC BY 3.0.
+MIT. This edition is based on the upstream `yt-structure` skill, with the original copyright and license retained. The *Wanna Work Together?* sample is credited in the document and licensed separately under CC BY 2.5.

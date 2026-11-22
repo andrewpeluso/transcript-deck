@@ -5,7 +5,7 @@ import { basename, dirname, extname, join, resolve } from 'node:path';
 import { parseCaptions, timecode } from './captions.mjs';
 
 const usage = 'Usage: yt-transcript <youtube-url> [output-dir]\n       yt-transcript --captions <file.vtt|file.srt|file.txt> [output-dir]';
-const setup = 'Install or update yt-dlp. On macOS, run brew install yt-dlp. On Linux, run pipx install "yt-dlp[default]" or pipx upgrade yt-dlp. Then retry. You can also supply a VTT, SRT, or text transcript.';
+const setup = 'Run the bundled yt-transcript script so it can prepare the caption tool. You can also supply captions as VTT, SRT, or text.';
 const downloaderFlags = ['--ignore-config', '--no-playlist', '--skip-download', '--no-warnings', '--no-progress', '--retries', '0', '--extractor-retries', '0', '--socket-timeout', '12', '--js-runtimes', 'node:' + process.execPath];
 const missingText = 'Supply a VTT, SRT, or text transcript to continue.';
 
@@ -38,7 +38,7 @@ function canonicalVideo(value) {
 }
 
 function runDownloader(args, url) {
-  const result = spawnSync('yt-dlp', [...downloaderFlags, ...args, '--', url], {
+  const result = spawnSync(process.env.TRANSCRIPT_DECK_YTDLP || 'yt-dlp', [...downloaderFlags, ...args, '--', url], {
     encoding: 'utf8', timeout: 45_000, maxBuffer: 24 * 1024 * 1024,
   });
   if (result.error?.code === 'ENOENT') throw new TranscriptError(`yt-dlp was not found. ${setup}`, 3);
@@ -66,7 +66,7 @@ function selectTracks(metadata) {
 
 function retrieve(url) {
   const result = runDownloader(['--dump-single-json', '--no-write-subs', '--no-write-auto-subs'], url);
-  if (result.status !== 0) throw new TranscriptError(`${failureMessage(result)} ${setup}`, 4);
+  if (result.status !== 0) throw new TranscriptError(`${failureMessage(result)} ${missingText}`, 4);
   let metadata;
   try {
     metadata = JSON.parse(result.stdout);

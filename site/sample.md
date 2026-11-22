@@ -1,45 +1,37 @@
-# Sintel — a conversation with the gatekeeper
+# How Creative Commons licenses work
 
-**Source:** [Sintel — Open Movie by Blender Foundation](https://www.youtube.com/watch?v=eRsGyueVLvQ)
+**Source:** [Wanna Work Together?](https://www.youtube.com/watch?v=q0VzUigrb_g) by Creative Commons
 
-**Captions:** Manual English · excerpt, 1:47–2:36
+**Captions:** YouTube automatic English · excerpt, 1:13–2:05
 
-## The blade
+## Share your work for reuse
 
-[1:47](https://www.youtube.com/watch?v=eRsGyueVLvQ&t=107s)
+[1:13](https://www.youtube.com/watch?v=q0VzUigrb_g&t=73s)
 
-This blade has a dark past. It has shed much innocent blood.
+But sometimes full copyright is too restrictive. What about when you want all those millions and millions of people out there to use your work without the hassle of coming to you for permission? What if you want your work to be freely shared, reused, and built upon by the rest of the world?
 
-You're a fool for traveling alone, so completely unprepared. You're lucky your blood's still flowing.
+Luckily, there's an answer. Creative Commons.
 
-Thank you.
+## Choose what people can do
 
-## The search
+[1:33](https://www.youtube.com/watch?v=q0VzUigrb_g&t=93s)
 
-[2:07](https://www.youtube.com/watch?v=eRsGyueVLvQ&t=127s)
+We provide free copyright licenses you can use to tell people exactly which parts of your copyright you're happy to give to the public. It's easy. It only takes a minute and it's totally free.
 
-So... What brings you to the land of the gatekeepers?
+Just come to our website and answer a few quick questions like, “Will you allow commercial uses of your work? And will you allow your work to be modified?”
 
-I'm searching for someone.
+## Make your terms clear
 
-Someone very dear? A kindred spirit?
+[1:53](https://www.youtube.com/watch?v=q0VzUigrb_g&t=113s)
 
-A dragon.
-
-## Traveling alone
-
-[2:28](https://www.youtube.com/watch?v=eRsGyueVLvQ&t=148s)
-
-A dangerous quest for a lone hunter.
-
-I've been alone for as long as I can remember.
+Based on your answers, we'll give you a license that clearly communicates what people can and can't do with your creativity. You don't give up your copyright. You refine it so it works better for you.
 
 ## Recap
 
-The gatekeeper warns about the blade and the danger of traveling alone. Sintel reveals she is looking for a dragon.
+Creative Commons licenses let creators tell others how they can reuse a work. The video gives commercial use and permission to modify the work as examples of decisions a creator can make.
 
 ### Editor's note
 
-Headings and recap were added. Dialogue follows the published English captions, with adjacent captions joined into paragraphs.
+Transcript Deck removed repeated caption lines, joined fragments, and added punctuation, headings, timestamps, and the recap.
 
-*Sintel* (2010), Blender Foundation / Durian Open Movie Project. Directed by Colin Levy, screenplay by Esther Wouda. Excerpt adapted under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). [Project and credits](https://durian.blender.org/about/).
+Excerpt from [*Wanna Work Together?* by Creative Commons](https://creativecommons.org/about/videos/wanna-work-together/), adapted under [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/).

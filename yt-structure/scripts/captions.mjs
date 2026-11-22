@@ -43,7 +43,9 @@ export function parseCaptions(source, rolling = false) {
         if (words.slice(0, size).join(' ') !== previous.words.slice(-size).join(' ')) continue;
         // A word repeated in adjacent cues can be real speech. Require stronger
         // evidence before dropping it.
-        if (size > 1 || (words.length === 1 && words.length === previous.words.length && start < previous.end) || timedRun.length) {
+        const singleWordRollover = words.length === 1 &&
+          (end - start < 0.05 || (previous.words.length === 1 && start < previous.end));
+        if (size > 1 || singleWordRollover || timedRun.length) {
           overlap = size;
         }
         break;

@@ -8,6 +8,7 @@ import { test } from 'node:test';
 import { parseCaptions, timecode } from '../yt-structure/scripts/captions.mjs';
 
 const cli = fileURLToPath(new URL('../yt-structure/scripts/transcript.mjs', import.meta.url));
+const launcher = fileURLToPath(new URL('../yt-structure/scripts/yt-transcript', import.meta.url));
 const video = 'https://youtu.be/eRsGyueVLvQ';
 const rawSample = readFileSync(new URL('../site/raw.txt', import.meta.url), 'utf8');
 const sample = readFileSync(new URL('../site/sample.md', import.meta.url), 'utf8');
@@ -55,14 +56,45 @@ last night
   assert.equal(parseCaptions(vtt).length, 4);
 });
 
-test('every preview cue and its timestamp are represented in the downloadable sample', () => {
-  for (const cue of parseCaptions(rawSample)) {
-    assert.ok(sample.includes(cue.text), cue.text);
-  }
-  const at = parseCaptions(rawSample).map(cue => Math.floor(cue.at));
-  const links = [...sample.matchAll(/&t=(\d+)s\)/g)].map(match => Number(match[1]));
-  assert.deepEqual(links, [107, 127, 148]);
+test('the example preserves its spoken words and links to real cue timestamps', () => {
+  const cues = parseCaptions(rawSample, true);
+  const dialogue = sample.slice(sample.indexOf('## Share your work'), sample.indexOf('## Recap'))
+    .split('\n').filter(line => line && !line.startsWith('##') && !line.startsWith('[')).join(' ');
+  const words = text => text.toLowerCase().replaceAll('’', "'").match(/[a-z]+(?:'[a-z]+)?/g);
+  assert.deepEqual(words(dialogue), words(cues.map(cue => cue.text).join(' ')));
+
+  const at = cues.map(cue => Math.floor(cue.at));
+  const links = [...sample.matchAll(/watch\?v=q0VzUigrb_g&t=(\d+)s\)/g)].map(match => Number(match[1]));
+  assert.deepEqual(links, [73, 93, 113]);
   assert.ok(links.every(link => at.includes(link)));
+});
+
+test('portable setup rejects a download with the wrong checksum', context => {
+  const temp = mkdtempSync(join(tmpdir(), 'transcript-deck-checksum-'));
+  context.after(() => rmSync(temp, { recursive: true, force: true }));
+  const cache = join(temp, 'cache');
+  writeFileSync(join(temp, 'yt-dlp'), '#!/bin/bash\nprintf "2000.01.01\\n"\n', { mode: 0o755 });
+  writeFileSync(join(temp, 'curl'), `#!/bin/bash
+while [[ $# -gt 0 ]]; do
+  if [[ "$1" == '-o' ]]; then
+    printf 'unexpected download' > "$2"
+    exit 0
+  fi
+  shift
+done
+exit 1
+`, { mode: 0o755 });
+  const result = spawnSync('/bin/bash', [launcher, video], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      PATH: [temp, dirname(process.execPath), process.env.PATH].join(delimiter),
+      TRANSCRIPT_DECK_CACHE_DIR: cache,
+    },
+  });
+  assert.equal(result.status, 3, result.stderr);
+  assert.match(result.stderr, /failed its checksum/);
+  assert.deepEqual(readdirSync(cache), []);
 });
 
 function setupCli(context) {
@@ -135,7 +167,7 @@ test('CLI offers supplied captions when a track or dependency is unavailable', c
   assert.match(absent.stderr, /No English caption track/);
   const missing = fixture.run('none', [video, fixture.output], fixture.output);
   assert.equal(missing.status, 3);
-  assert.match(missing.stderr, /brew install yt-dlp/);
+  assert.match(missing.stderr, /bundled yt-transcript script/);
   const picked = join(fixture.temp, 'supplied.srt');
   writeFileSync(picked, '1\n00:00:03,500 --> 00:00:04,400\nSupplied words.\n');
   const supplied = fixture.run('none', ['--captions', picked, fixture.output], fixture.output);
