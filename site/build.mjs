@@ -54,7 +54,7 @@ const pages = [
   },
 ];
 
-const raw = (await readFile(site('raw.txt'), 'utf8')).trim();
+const starterPrompt = 'Use Transcript Deck (https://transcriptdeck.com/skill.md) to turn https://www.youtube.com/watch?v=uXdEVeoGRRc into a Markdown file with timestamped sections. Run the setup if needed and give me the file.';
 const analytics = measurementId ? `<meta name="ga4-measurement-id" content="${measurementId}">` : '';
 const headers = await readFile(site('_headers'), 'utf8');
 const analyticsPolicy = [
@@ -72,7 +72,7 @@ async function buildPage({ path, template, schema }) {
   const directory = dist(path.slice(1));
   await mkdir(directory, { recursive: true });
   await writeFile(new URL('index.html', directory), html
-    .replace('<!-- raw-caption-preview -->', () => escapeHtml(raw))
+    .replaceAll('<!-- starter-prompt -->', () => escapeHtml(starterPrompt))
     .replace('<!-- canonical -->', metadata)
     .replace('<!-- structured-data -->', () => `<script type="application/ld+json">${graph}</script>`)
     .replace('<!-- analytics -->', analytics));

@@ -36,35 +36,39 @@ h1 span { color: var(--accent) }
 .primary { background: var(--accent); color: #18210d }
 .outline { border-color: #687568 }
 .example { background: var(--surface); border: 1px solid var(--line); border-radius: .8rem; overflow: hidden; box-shadow: 0 1.6rem 3.5rem #0004 }
-.example-top, .example-bottom { display: flex; justify-content: space-between; align-items: center; gap: .55rem; padding: .75rem .9rem }
+.example-top { display: flex; justify-content: space-between; align-items: center; gap: .55rem; padding: .9rem }
 .example-top h2 { font: 500 .84rem/1.25 var(--mono); margin: 0; color: #d6dfd4 }
-.example-top h2 span { color: #91a08f }
-.preview-buttons { display: flex; align-items: center; gap: .15rem; background: #141a16; border: 1px solid #485249; padding: .17rem; border-radius: .35rem }
-.preview-buttons button { border: 0; background: transparent; border-radius: .22rem; padding: .34rem .59rem; font-size: .82rem; color: #cbd3c9 }
-.preview-buttons button[aria-pressed="true"] { background: #455843; color: white }
-.sheet { margin: 0 .7rem; background: var(--paper); color: var(--paper-ink); border-radius: .36rem; padding: 1.35rem clamp(1rem, 2.3vw, 1.7rem); min-height: 22.4rem; height: 22.4rem; overflow-y: auto }
-.sheet-title { margin: 0 0 .75rem; font: 400 clamp(1.75rem, 3vw, 2.5rem)/1.05 var(--serif); letter-spacing: -.045em }
+.example-top a { color: var(--muted); font-size: .82rem; white-space: nowrap }
+.sheet { margin: 0 .7rem; background: var(--paper); color: var(--paper-ink); border-radius: .36rem; padding: clamp(1.05rem, 2.3vw, 1.7rem) }
+.sheet-title { margin: 0; font: 400 clamp(1.75rem, 3.1vw, 2.65rem)/1.04 var(--serif); letter-spacing: -.045em; text-wrap: balance }
+.sheet-note { color: #505c4a; font-size: .84rem; margin: .55rem 0 1rem }
 .sheet section { border-top: 1px solid #d5d9cd; padding: .7rem 0 .62rem }
 .sheet h3 { font-size: 1rem; margin: 0 0 .28rem }
 .sheet section div { display: grid; grid-template-columns: 3.25rem 1fr; align-items: baseline }
 .sheet section p { margin: 0; font-size: .91rem; line-height: 1.4 }
-.time { color: #385322; width: fit-content; font: 650 .83rem/1.35 var(--mono) }
-.raw { font: .83rem/1.62 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere }
-.example-bottom { padding: .62rem .9rem }
-.example-bottom a { color: var(--muted); font-size: .76rem; text-align: right }
-.demo { display: flex; align-items: center; gap: .48rem; padding: .25rem .28rem; border: 0; background: transparent; color: var(--accent); font-size: .82rem; text-align: left }
-.demo span:first-child { width: 0; height: 0; border-left: .45rem solid; border-block: .29rem solid transparent }
-.demo.playing span:first-child { width: .49rem; height: .62rem; border: 0; border-inline: .16rem solid }
-.demo-progress { height: 3px; background: var(--surface) }
-.demo-progress div { background: var(--accent); height: 100%; width: 0 }
-.demo-progress .running { width: 100%; transition: width 12s linear }
+.time { display: inline-flex; align-items: center; color: #385322; width: fit-content; min-height: 24px; font: 650 .85rem/1.35 var(--mono) }
+.walkthrough { margin: 0 .7rem; padding-bottom: .25rem }
+.walkthrough summary { padding: .8rem .3rem; font-size: .9rem; font-weight: 650 }
+.walkthrough summary:focus-visible { outline-offset: -2px }
+.walkthrough ol { color: var(--muted); margin: .65rem 0 1rem; padding: 0 .45rem 0 1.7rem; font-size: .91rem }
+.walkthrough li + li { margin-top: .8rem }
+.walkthrough a { color: var(--accent) }
+.walkthrough strong { color: var(--ink) }
+.walkthrough .code-box { background: var(--bg); margin-top: .4rem }
+.walkthrough .code-box code { font-size: .77rem }
+.walkthrough li p { font-size: .85rem; margin: .45rem 0 0 }
+.demo-context { color: var(--muted); margin: .1rem .3rem .9rem; padding: .15rem .75rem; border-inline-start: 2px solid var(--line) }
+.demo-context span { white-space: nowrap }
 .install, .split { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); padding: 3.4rem 0 4.25rem; border-top: 1px solid var(--line); scroll-margin-top: 1.2rem }
 .section-title, .install h2 { margin: 0; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 1 }
 .install-intro p { color: var(--muted); max-width: 32ch }
 summary { cursor: pointer; color: var(--accent) }
 details p { font-size: .94rem }
 .setup { align-self: start }
+.setup-links { display: flex; flex-wrap: wrap; gap: .4rem 1rem }
 .skill-link { color: var(--accent); font-size: .94rem }
+.copy-status { color: var(--accent); font-size: .91rem; margin: .6rem 0 }
+.copy-status:empty { margin: 0 }
 .instruction h3 { font-size: .94rem; font-weight: 620; margin: 0 0 .45rem }
 .instruction { margin-bottom: .95rem }
 .code-box { display: flex; align-items: center; gap: .8rem; background: var(--surface); border: 1px solid var(--line); border-radius: .45rem; padding: .67rem .65rem .67rem .85rem }
@@ -106,7 +110,6 @@ details p { font-size: .94rem }
   .guide-header h1 { max-width: none }
   .kit, .guide-content { grid-area: auto }
   .actions .button { padding-inline: .86rem; font-size: .95rem }
-  .sheet { min-height: 20.4rem; height: 20.4rem }
   .install, .split { padding-block: 2.5rem }
 }
 @media (max-width: 25rem) {
@@ -116,13 +119,11 @@ details p { font-size: .94rem }
   .top nav { gap: .65rem }
   .brand { gap: .35rem }
   .brand img { width: 27px; height: 27px }
-  .example-top, .example-bottom { padding-inline: .65rem }
-  .example-top h2 { font-size: .72rem }
-  .example-bottom a { font-size: .66rem }
-  .preview-buttons button { padding-inline: .4rem }
-  .sheet { padding-inline: .9rem; margin-inline: .5rem; height: 23rem }
+  .example-top { padding-inline: .65rem }
+  .example-top h2 { font-size: .8rem }
+  .sheet, .walkthrough { margin-inline: .5rem }
+  .sheet { padding-inline: .9rem }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
-  .demo-progress .running { transition: none }
 }

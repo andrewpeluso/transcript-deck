@@ -26,36 +26,47 @@
       <div class="intro">
         <h1>YouTube transcripts for your AI agent<span>.</span></h1>
         <p>Transcript Deck is a free skill for Codex and Claude Code. It turns a YouTube link into a readable Markdown file with topic headings and timestamps that jump to the video.</p>
-        <div class="actions"><button class="button primary" type="button" data-copy="prompt" data-position="hero">Copy starter prompt</button><a class="button outline" href="/sample.md" download>Download sample</a></div>
-        <p class="hero-hint">Paste the prompt into your agent. It handles setup.</p>
+        <div class="actions"><button id="start" class="button primary" type="button" data-copy="prompt" data-position="hero" data-copy-status="hero-copy-status">Copy starter prompt</button></div>
+        <p class="hero-hint" id="hero-copy-status" role="status">Paste into Codex or Claude Code. Your agent handles setup.</p>
       </div>
       <section id="example" class="example" aria-labelledby="example-title">
         <div class="example-top">
-          <h2 id="example-title">Wanna Work Together? <span>·</span> 1:13–2:05</h2>
-          <div class="preview-buttons" aria-label="Transcript view">
-            <button type="button" data-view="raw" aria-pressed="false">Captions</button>
-            <button type="button" data-view="clean" aria-pressed="true">Markdown</button>
-          </div>
+          <h2 id="example-title">Inbox Zero in 17 Minutes</h2>
+          <a href="https://www.youtube.com/watch?v=uXdEVeoGRRc">Tiago Forte</a>
         </div>
-        <div class="sheet" id="clean">
-          <p class="sheet-title">How Creative Commons<br> licenses work</p>
-          <section><h3>Share your work for reuse</h3><div><a class="time" href="https://www.youtube.com/watch?v=q0VzUigrb_g&amp;t=73s" target="_blank" rel="noopener">1:13</a><p>But sometimes full copyright is too restrictive.</p></div></section>
-          <section><h3>Choose what people can do</h3><div><a class="time" href="https://www.youtube.com/watch?v=q0VzUigrb_g&amp;t=93s" target="_blank" rel="noopener">1:33</a><p>“We provide free copyright licenses you can use…”</p></div></section>
-          <section><h3>Make your terms clear</h3><div><a class="time" href="https://www.youtube.com/watch?v=q0VzUigrb_g&amp;t=113s" target="_blank" rel="noopener">1:53</a><p>“Based on your answers, we’ll give you a license…”</p></div></section>
+        <div class="sheet">
+          <p class="sheet-title">What should I do with all these newsletters?</p>
+          <p class="sheet-note">Recap from the transcript</p>
+          <section><h3>Unsubscribe first</h3><div><a class="time" href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=159s" target="_blank" rel="noopener" aria-label="2:39 in the original video (opens in a new tab)">2:39</a><p>Start with recurring emails you no longer want to receive.</p></div></section>
+          <section><h3>Make a reading tab</h3><div><a class="time" href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=207s" target="_blank" rel="noopener" aria-label="3:27 in the original video (opens in a new tab)">3:27</a><p>Filter newsletters you want to keep into a separate place to read later.</p></div></section>
         </div>
-        <pre id="raw" class="sheet raw" aria-label="Source captions" tabindex="0" hidden><!-- raw-caption-preview --></pre>
-        <div class="example-bottom"><button class="demo" id="demo" type="button"><span aria-hidden="true"></span><span id="demo-label">Play 12-second demo</span></button><a href="https://creativecommons.org/about/videos/wanna-work-together/">Creative Commons · CC BY 2.5</a></div>
-        <div class="demo-progress" aria-hidden="true"><div id="demo-progress"></div></div>
+        <details class="walkthrough">
+          <summary>See how it works</summary>
+          <p class="demo-context">I used this video to decide what to unsubscribe from and where to put the newsletters I still wanted to read. <span>— Andrew Peluso</span></p>
+          <ol>
+            <li><a href="#start">Copy the starter prompt.</a> It already includes Tiago Forte’s video link.</li>
+            <li>
+              <strong>Paste it into Codex or Claude Code.</strong>
+              <div class="code-box"><code><!-- starter-prompt --></code></div>
+              <p>Your agent may ask permission to download its tools the first time.</p>
+            </li>
+            <li><strong>Open the Markdown file your agent returns.</strong> Find the topic you need, then click its timestamp. <a href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=207s" target="_blank" rel="noopener">Try it at 3:27 in the original video.</a></li>
+          </ol>
+        </details>
       </section>
     </div>
     <section id="install" class="install" aria-labelledby="install-title">
       <div class="install-intro">
         <h2 id="install-title">Try it in your agent.</h2>
         <p>Save a webinar for research, pull a quote with its timestamp, or keep a tutorial as a searchable reference.</p>
-        <a class="skill-link" href="/skill.md">Read the skill instructions</a>
+        <div class="setup-links">
+          <a class="skill-link" href="/skill.md">Read the skill instructions</a>
+          <a class="skill-link" href="/sample.md" download>Download a sample transcript</a>
+        </div>
       </div>
       <div class="setup">
-        <div class="instruction"><h3>Paste into Codex or Claude Code</h3><div class="code-box"><code id="prompt">Use Transcript Deck (https://transcriptdeck.com/skill.md) to turn https://www.youtube.com/watch?v=q0VzUigrb_g into a Markdown file with timestamped sections. Run the setup if needed and give me the file.</code><button class="copy" type="button" data-copy="prompt" data-position="setup" aria-label="Copy starter prompt text">Copy</button></div></div>
+        <div class="instruction"><h3>Paste into Codex or Claude Code</h3><div class="code-box"><code id="prompt"><!-- starter-prompt --></code><button class="copy" type="button" data-copy="prompt" data-position="setup" data-copy-status="setup-copy-status" aria-label="Copy starter prompt text">Copy</button></div></div>
+        <p id="setup-copy-status" class="copy-status" role="status"></p>
         <p class="hint">Start with the example or replace the video link with your own. If captions are unavailable, share a caption file or paste the transcript.</p>
         <details><summary>Setup details and optional install</summary>
           <p>The starter prompt works in a local macOS or Linux workspace with shell and network access. Your agent may ask permission to download its tools the first time.</p>
