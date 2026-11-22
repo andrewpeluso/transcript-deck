@@ -19,18 +19,6 @@ if (measurementId) {
   document.head.append(tag);
 }
 
-const walkthroughShortcut = document.getElementById('walkthrough-shortcut');
-if (walkthroughShortcut) {
-  const walkthrough = document.querySelector('.walkthrough');
-  const openWalkthrough = () => { walkthrough.open = true; };
-  const openLinkedWalkthrough = () => {
-    if (location.hash === walkthroughShortcut.hash) openWalkthrough();
-  };
-  walkthroughShortcut.addEventListener('click', openWalkthrough);
-  window.addEventListener('hashchange', openLinkedWalkthrough);
-  openLinkedWalkthrough();
-}
-
 for (const button of document.querySelectorAll('[data-copy]')) {
   const label = button.textContent;
   const element = document.getElementById(button.dataset.copy);

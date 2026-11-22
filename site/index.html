@@ -24,38 +24,40 @@
   <main class="shell">
     <div class="hero">
       <div class="intro">
-        <h1>YouTube transcripts for your AI agent<span>.</span></h1>
-        <p>Transcript Deck is a free skill for Codex and Claude Code. It turns a YouTube link into a readable Markdown file with topic headings and timestamps that jump to the video.</p>
+        <h1>Get a YouTube transcript your agent can use<span>.</span></h1>
+        <p>Give Codex or Claude Code a YouTube link. It pulls the captions and automatically turns them into a clean, timestamped transcript you can use again. No YouTube API key needed.</p>
         <div class="actions">
           <button id="start" class="button primary" type="button" data-copy="prompt" data-position="hero" data-copy-status="hero-copy-status">Copy starter prompt</button>
-          <a class="walkthrough-shortcut" id="walkthrough-shortcut" href="#walkthrough-heading">See how it works</a>
+          <a class="walkthrough-shortcut" href="#walkthrough-heading">See how it works</a>
         </div>
         <p class="hero-hint" id="hero-copy-status" role="status">Paste into Codex or Claude Code. Your agent handles setup.</p>
       </div>
-      <section id="example" class="example" aria-labelledby="example-title">
-        <div class="example-top">
-          <p>Inbox Zero in 17 Minutes</p>
-          <a href="https://www.youtube.com/watch?v=uXdEVeoGRRc">Tiago Forte</a>
+      <section id="example" class="example" aria-labelledby="walkthrough-heading">
+        <h2 id="walkthrough-heading" tabindex="-1">From link to transcript</h2>
+        <ol class="workflow-steps">
+          <li><strong>Give your agent a YouTube link.</strong> <a class="example-url" href="https://youtu.be/uXdEVeoGRRc" aria-label="Open Tiago Forte’s inbox video on YouTube">youtu.be/uXdEVeoGRRc</a></li>
+          <li><strong>It pulls the captions.</strong> The text arrives in short, timestamped lines.</li>
+          <li><strong>It saves a cleaned transcript.</strong> Related lines become paragraphs under topic headings.</li>
+        </ol>
+        <div class="comparison">
+          <section class="caption-before" aria-labelledby="before-title">
+            <h3 id="before-title">Before <span>· Pulled captions</span></h3>
+            <pre>[3:27] Yeah, good question. In that case, I
+[3:29] would create a separate inbox or a
+[3:31] separate tab depending on your email
+[3:33] platform.</pre>
+          </section>
+          <section class="caption-after" aria-labelledby="after-title">
+            <h3 id="after-title">After <span>· Cleaned transcript</span></h3>
+            <h4>Make a reading tab</h4>
+            <a class="time" href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=207s" target="_blank" rel="noopener" aria-label="3:27 in the original video (opens in a new tab)">3:27</a>
+            <p>In that case, I would create a separate inbox or a separate tab, depending on your email platform.</p>
+          </section>
         </div>
-        <div class="sheet">
-          <h2 class="sheet-title" id="example-title">What should I do with all these newsletters?</h2>
-          <p class="sheet-note">Recap from the transcript</p>
-          <section><h3>Unsubscribe first</h3><div><a class="time" href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=159s" target="_blank" rel="noopener" aria-label="2:39 in the original video (opens in a new tab)">2:39</a><p>Start with recurring emails you no longer want to receive.</p></div></section>
-          <section><h3>Make a reading tab</h3><div><a class="time" href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=207s" target="_blank" rel="noopener" aria-label="3:27 in the original video (opens in a new tab)">3:27</a><p>Filter newsletters you want to keep into a separate place to read later.</p></div></section>
-        </div>
-        <details class="walkthrough">
-          <summary id="walkthrough-heading">See how it works</summary>
-          <p class="demo-context">I used this video to decide what to unsubscribe from and where to put the newsletters I still wanted to read. <span>— Andrew Peluso</span></p>
-          <ol>
-            <li><a href="#start">Copy the starter prompt.</a> It already includes Tiago Forte’s video link.</li>
-            <li>
-              <strong>Paste it into Codex or Claude Code.</strong>
-              <div class="code-box"><code><!-- starter-prompt --></code></div>
-              <p>Your agent may ask permission to download its tools the first time.</p>
-            </li>
-            <li><strong>Open the Markdown file your agent returns.</strong> Find the topic you need, then click its timestamp. <a href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=207s" target="_blank" rel="noopener">Try it at 3:27 in the original video.</a></li>
-          </ol>
-        </details>
+        <section class="demo-answer" aria-labelledby="demo-question">
+          <h3 id="demo-question">How do I stay subscribed and keep the newsletter out of my inbox?</h3>
+          <p>Forte suggests routing them to a separate inbox or reading tab, depending on what your email app supports. <a href="https://www.youtube.com/watch?v=uXdEVeoGRRc&amp;t=207s">Hear his advice at 3:27</a>.</p>
+        </section>
       </section>
     </div>
     <section id="install" class="install" aria-labelledby="install-title">
@@ -79,6 +81,21 @@
         <p id="copy-status" class="sr-only" role="status"></p>
       </div>
     </section>
+    <section class="split" aria-labelledby="cleanup-title">
+      <h2 class="section-title" id="cleanup-title">Why clean up a transcript?</h2>
+      <div class="prose">
+        <p>I built Transcript Deck for the same reason a chef washes, chops, and measures ingredients before service. I prepare the transcript up front so my agent can focus on applying the advice when I actually need it.</p>
+        <p>The headings help my agent find the passage it needs. The timestamp links let me check that it understood the advice in context.</p>
+      </div>
+    </section>
+    <section class="split" aria-labelledby="library-title">
+      <h2 class="section-title" id="library-title">Build a library your agent can reuse</h2>
+      <div class="prose">
+        <p>I save transcripts on YouTube titles, hooks, thumbnails, and intros. When I’m working on a title, I can ask my agent to find the relevant advice across several videos, compare what creators say, and show me the moments behind its recommendation.</p>
+        <p>Each video gives it another source to draw from. The transcripts I’ve already prepared are ready for the next question, too.</p>
+        <a class="button outline" href="/guides/youtube-knowledge-base/">Read the knowledge base guide</a>
+      </div>
+    </section>
     <section class="split" aria-labelledby="inbox-title">
       <div>
         <h2 class="section-title" id="inbox-title">How I used it to tackle my inbox</h2>
@@ -90,17 +107,10 @@
         <p>I felt more confident in the plan because I knew whose advice it drew from and could go back to the source.</p>
       </div>
     </section>
-    <section class="split" aria-labelledby="library-title">
-      <h2 class="section-title" id="library-title">Build a library you can return to</h2>
-      <div class="prose">
-        <p>I keep a collection of videos on YouTube titles, hooks, thumbnails, and intros. When I’m working on a title or learning something new from a channel I trust, I can ask my agent to work from those transcripts and show me the advice it used.</p>
-        <a class="button outline" href="/guides/youtube-knowledge-base/">Read the knowledge base guide</a>
-      </div>
-    </section>
     <section class="split" aria-labelledby="answers-title">
       <h2 class="section-title" id="answers-title">What to know before you start</h2>
       <dl class="answers">
-        <div><dt>Which AI agents can use Transcript Deck?</dt><dd>Use Codex or Claude Code in a local workspace on macOS or Linux. Your agent needs access to a terminal and the internet.</dd></div>
+        <div><dt>Which AI agents can use Transcript Deck?</dt><dd>The skill is free to use with Codex or Claude Code in a local workspace on macOS or Linux. Your agent needs access to a terminal and the internet.</dd></div>
         <div><dt>What does the Markdown file include?</dt><dd>A transcript grouped under topic headings, with links to timestamps in the original video. You can read it, give it to your agent, or save it in a knowledge base.</dd></div>
         <div><dt>Do I need to install anything first?</dt><dd>Start by pasting the prompt into your agent. It checks for the tools it needs and sets them up if they’re missing. It may ask permission to download them.</dd></div>
         <div><dt>What if the video has no accessible English captions?</dt><dd>Give your agent a subtitle file or paste a transcript. Transcript Deck retrieves existing captions and can structure text you provide. It needs one of those text sources to work.</dd></div>

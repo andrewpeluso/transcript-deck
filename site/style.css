@@ -27,39 +27,38 @@ nav a:hover, nav [aria-current="page"], .foot a:hover { color: var(--accent) }
 .hero { display: grid; grid-template-columns: 1.04fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); padding-block: clamp(4.25rem, 8vw, 7.5rem) }
 h1, .section-title, .install h2, .guide-content h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.055em }
 h1 { margin: 0; font-size: clamp(3.3rem, 5.9vw, 5.85rem); line-height: .96; text-wrap: balance }
+.hero h1 { font-size: clamp(3rem, 5.4vw, 5.35rem) }
 h1 span { color: var(--accent) }
 .intro p { color: var(--muted); margin: 1.6rem 0 1.8rem; max-width: 37ch; font-size: clamp(1.08rem, 2vw, 1.26rem) }
 .intro .hero-hint { margin: .8rem 0 0; max-width: none; font-size: .92rem }
 .actions { display: flex; gap: .65rem; flex-wrap: wrap }
-.walkthrough-shortcut { display: none }
+.walkthrough-shortcut { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--accent); font-size: .875rem }
 .button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; border-radius: .45rem; padding: .73rem 1.05rem; min-height: 2.85rem; font-weight: 640; text-decoration: none }
 .button:hover { filter: brightness(.89) }
 .primary { background: var(--accent); color: #18210d }
 .outline { border-color: #687568 }
-.example { background: var(--surface); border: 1px solid var(--line); border-radius: .8rem; overflow: hidden; box-shadow: 0 1.6rem 3.5rem #0004 }
-.example-top { display: flex; justify-content: space-between; align-items: center; gap: .55rem; padding: .9rem }
-.example-top p { font: 500 .84rem/1.25 var(--mono); margin: 0; color: #d6dfd4 }
-.example-top a { color: var(--muted); font-size: .82rem; white-space: nowrap }
-.sheet { margin: 0 .7rem; background: var(--paper); color: var(--paper-ink); border-radius: .36rem; padding: clamp(1.05rem, 2.3vw, 1.7rem) }
-.sheet-title { margin: 0; font: 400 clamp(1.75rem, 3.1vw, 2.65rem)/1.04 var(--serif); letter-spacing: -.045em; text-wrap: balance }
-.sheet-note { color: #505c4a; font-size: .84rem; margin: .55rem 0 1rem }
-.sheet section { border-top: 1px solid #d5d9cd; padding: .7rem 0 .62rem }
-.sheet h3 { font-size: 1rem; margin: 0 0 .28rem }
-.sheet section div { display: grid; grid-template-columns: 3.25rem 1fr; align-items: baseline }
-.sheet section p { margin: 0; font-size: .91rem; line-height: 1.4 }
+.example { min-width: 0 }
+.example > h2 { margin: 0; font: 400 clamp(1.8rem, 3vw, 2.55rem)/1.08 var(--serif); letter-spacing: -.035em; scroll-margin-block-start: 1rem }
+.workflow-steps { display: grid; gap: .45rem; margin: .95rem 0 1.2rem; padding-inline-start: 1.45rem; color: var(--muted); font-size: .92rem }
+.workflow-steps li { padding-inline-start: .25rem }
+.workflow-steps li::marker { color: var(--accent); font-weight: 700 }
+.workflow-steps strong { color: var(--ink) }
+.workflow-steps a, .demo-answer a { color: var(--accent) }
+.example-url { font: .82rem var(--mono); overflow-wrap: anywhere }
+.comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: .4rem; overflow: hidden }
+.comparison section { min-width: 0; padding: .85rem .9rem }
+.comparison h3 { margin: 0 0 .8rem; font-size: .85rem; line-height: 1.4 }
+.comparison h3 span { font-weight: 500 }
+.caption-before { color: var(--muted) }
+.caption-before pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; font: .79rem/1.65 var(--mono); font-variant-numeric: tabular-nums }
+.caption-after { background: var(--paper); color: var(--paper-ink) }
+.caption-after h3 span { color: #505c4a }
+.caption-after h4 { margin: 0; font: 600 1.08rem/1.3 system-ui, sans-serif }
+.caption-after p { margin: .12rem 0 0; font-size: .9rem }
 .time { display: inline-flex; align-items: center; color: #385322; width: fit-content; min-height: 24px; font: 650 .85rem/1.35 var(--mono) }
-.walkthrough { margin: 0 .7rem; padding-bottom: .25rem }
-.walkthrough summary { padding: .8rem .3rem; font-size: .9rem; font-weight: 650; scroll-margin-block-start: .75rem }
-.walkthrough summary:focus-visible { outline-offset: -2px }
-.walkthrough ol { color: var(--muted); margin: .65rem 0 1rem; padding: 0 .45rem 0 1.7rem; font-size: .91rem }
-.walkthrough li + li { margin-top: .8rem }
-.walkthrough a { color: var(--accent) }
-.walkthrough strong { color: var(--ink) }
-.walkthrough .code-box { background: var(--bg); margin-top: .4rem }
-.walkthrough .code-box code { font-size: .77rem }
-.walkthrough li p { font-size: .85rem; margin: .45rem 0 0 }
-.demo-context { color: var(--muted); margin: .1rem .3rem .9rem; padding: .15rem .75rem; border-inline-start: 2px solid var(--line) }
-.demo-context span { white-space: nowrap }
+.demo-answer { margin-top: 1rem }
+.demo-answer h3 { margin: 0 0 .25rem; font-size: .96rem }
+.demo-answer p { margin: 0; color: var(--muted); font-size: .9rem }
 .install, .split { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 7vw, 6rem); padding: 3.4rem 0 4.25rem; border-top: 1px solid var(--line); scroll-margin-top: 1.2rem }
 .section-title, .install h2 { margin: 0; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 1 }
 .install-intro p { color: var(--muted); max-width: 32ch }
@@ -76,7 +75,7 @@ details p { font-size: .94rem }
 .code-box code { flex: 1; min-width: 0; overflow-wrap: anywhere; color: #dfecd9; font: .86rem/1.5 var(--mono) }
 .copy { border: 1px solid #697669; padding: .35rem .55rem; min-width: 3.5rem; border-radius: .3rem; background: #2f3b2e; font-size: .86rem }
 .copy:hover { border-color: var(--accent) }
-.prose p { color: var(--muted); margin: 0 0 1rem; font-size: 1.05rem; max-width: 66ch }
+.prose p { color: var(--muted); margin: 0 0 1rem; font-size: 1.05rem; max-inline-size: 55ch; text-wrap: pretty }
 .prose p:last-child { margin-bottom: 0 }
 .prose a:not(.button) { color: var(--accent) }
 .prose > .button { margin-top: .25rem }
@@ -90,7 +89,6 @@ details p { font-size: .94rem }
 .guide-lede { max-width: 46ch; color: var(--muted); font-size: 1.22rem; margin: 1.35rem 0 0 }
 .guide-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, .55fr); align-items: start; gap: clamp(2rem, 7vw, 6rem); padding-block: 2.75rem 4rem }
 .guide-content { grid-area: 1 / 1 }
-.guide-content p { max-inline-size: 55ch; text-wrap: pretty }
 .guide-content section + section { margin-top: 2.5rem }
 .guide-content h2 { margin: 0 0 .65rem; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.07 }
 .guide-content .code-box { margin-top: 1.2rem }
@@ -106,13 +104,12 @@ details p { font-size: .94rem }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap }
 @media (max-width: 50rem) {
   .shell { width: min(36rem, calc(100% - 3rem)) }
-  .hero, .install, .split, .guide-layout { grid-template-columns: 1fr }
-  .hero { gap: 2rem; padding-block: 3rem }
+  .hero, .comparison, .install, .split, .guide-layout { grid-template-columns: 1fr }
+  .hero { gap: 2rem; padding-block: 2.5rem 3rem }
   .split { gap: 1.15rem }
   .guide-header h1 { max-width: none }
   .kit, .guide-content { grid-area: auto }
   .actions .button { padding-inline: .86rem; font-size: .95rem }
-  .walkthrough-shortcut { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--accent); font-size: .875rem }
   .install, .split { padding-block: 2.5rem }
 }
 @media (max-width: 25rem) {
@@ -124,10 +121,6 @@ details p { font-size: .94rem }
   .brand img { width: 27px; height: 27px }
   .actions { column-gap: .5rem }
   .actions .button { padding-inline: .6rem }
-  .example-top { padding-inline: .65rem }
-  .example-top p { font-size: .8rem }
-  .sheet, .walkthrough { margin-inline: .5rem }
-  .sheet { padding-inline: .9rem }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
