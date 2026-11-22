@@ -2,7 +2,7 @@
 
 Turn a YouTube link into a Markdown transcript with topic headings and links to the source timestamps. A personal project by [Andrew Peluso](https://andrewpeluso.com/).
 
-[Try Transcript Deck](https://transcript-deck.pages.dev/) · [Download the sample transcript](site/sample.md).
+[Try Transcript Deck](https://transcriptdeck.com/) · [Download the sample transcript](site/sample.md).
 
 ## Install the skill
 
@@ -33,14 +33,14 @@ npm test
 npm run build
 ```
 
-Only the generated `dist/` folder is public. Run the following on an authenticated Cloudflare account with Pages edit access. Use the final public HTTPS origin for `TRANSCRIPT_DECK_ORIGIN` once its DNS is active.
+Only the generated `dist/` folder is public. To redeploy, authenticate the Netlify CLI to the account that owns the `transcript-deck` project and run:
 
 ```sh
-TRANSCRIPT_DECK_ORIGIN=https://transcript-deck.pages.dev npm run build
-npx wrangler@4.55.0 pages deploy dist --project-name=transcript-deck --branch=main
+TRANSCRIPT_DECK_ORIGIN=https://transcriptdeck.com npm run build
+npx netlify-cli deploy --dir dist --site transcript-deck --prod
 ```
 
-For rollback, open **Workers & Pages → transcript-deck → Deployments** and roll back to the previous production deployment. Alternatively, check out the known-good release in a separate worktree, rebuild using the current public origin, and redeploy `dist/`.
+For rollback, open **Deploys** in [the Netlify project](https://app.netlify.com/projects/transcript-deck), select the last verified production deploy, and choose **Publish Deploy**. You can also check out a known-good release in a separate worktree, then rebuild and redeploy using the commands above.
 
 ## License
 
