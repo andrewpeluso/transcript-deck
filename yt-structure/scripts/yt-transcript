@@ -5,6 +5,19 @@ node_release=v22.23.5
 caption_release=2026.10.26
 cache_location="${TRANSCRIPT_DECK_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/transcript-deck}"
 platform="$(uname -s)-$(uname -m)"
+temporary_cache=false
+
+# A local agent can allow the workspace and temporary directory while
+# restricting writes to the normal user cache.
+if [[ -z "${TRANSCRIPT_DECK_CACHE_DIR:-}" ]]; then
+  if cache_probe="$(mkdir -p "$cache_location" 2>/dev/null && mktemp -d "$cache_location/.write.XXXXXXXX" 2>/dev/null)"; then
+    rmdir "$cache_probe"
+  else
+    cache_location="$(mktemp -d "${TMPDIR:-/tmp}/transcript-deck-tools.XXXXXXXX")"
+    trap 'rm -rf -- "$cache_location"' EXIT
+    temporary_cache=true
+  fi
+fi
 
 checked_download() {
   local url="$1" destination="$2" expected="$3" actual
@@ -52,27 +65,44 @@ prepare_node() (
 
 prepare_downloader() (
   set -e
-  local asset hash target installed
+  local asset hash target bundle installed
   installed="$(yt-dlp --version 2>/dev/null || true)"
   if [[ "$installed" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2} && ( "$installed" == "$caption_release"* || "$installed" > "$caption_release" ) ]]; then
     command -v yt-dlp
     exit
   fi
   case "$platform" in
-    Darwin-arm64|Darwin-x86_64) asset=yt-dlp_macos; hash=0f922c15ccc0b83eefa1c8bc9104e434318c4bf16e408e1ee93b7745a6efe0aa ;;
+    Darwin-arm64|Darwin-x86_64) asset=yt-dlp_macos.zip; hash=20d98fa608998eff87d1d35a6e9fb65e4b874639a6cc89addc19da3becde3ef1 ;;
     Linux-x86_64) asset=yt-dlp_linux; hash=767ba9dce7052aa196f8b12652f433d76de128ba168966fa84b6394d5e6c6795 ;;
     Linux-aarch64|Linux-arm64) asset=yt-dlp_linux_aarch64; hash=e87e9533e89fe5889abaa21f5114dfe7756d6aa6219b83551add04d48b18e483 ;;
     *) echo "Automatic setup is unavailable for $platform." >&2; exit 1 ;;
   esac
-  target="$cache_location/$asset-$caption_release"
+  bundle="$cache_location/$asset-$caption_release"
+  target="$bundle"
+  if [[ "$asset" == *.zip ]]; then
+    target="$bundle/yt-dlp_macos"
+  fi
   if [[ ! -x "$target" ]]; then
     mkdir -p "$cache_location" || exit 1
     setup_dir="$(mktemp -d "$cache_location/setup-captions.XXXXXXXX")" || exit 1
     trap 'rm -rf -- "$setup_dir"' EXIT
     echo 'Preparing the YouTube caption tool…' >&2
-    checked_download "https://github.com/yt-dlp/yt-dlp/releases/download/$caption_release/$asset" "$setup_dir/yt-dlp" "$hash" || exit 1
-    chmod 755 "$setup_dir/yt-dlp" || exit 1
-    mv -f "$setup_dir/yt-dlp" "$target" || exit 1
+    checked_download "https://github.com/yt-dlp/yt-dlp/releases/download/$caption_release/$asset" "$setup_dir/$asset" "$hash" || exit 1
+    if [[ "$asset" == *.zip ]]; then
+      # The unpacked macOS release runs inside sandboxes that block the
+      # single-file release's interprocess semaphore.
+      tar -xf "$setup_dir/$asset" -C "$setup_dir" || exit 1
+      rm -f -- "$setup_dir/$asset" || exit 1
+      "$setup_dir/yt-dlp_macos" --version >/dev/null || exit 1
+      if ln -s -n "$(basename "$setup_dir")" "$bundle"; then
+        trap - EXIT
+      elif [[ ! -x "$target" ]]; then
+        exit 1
+      fi
+    else
+      chmod 755 "$setup_dir/$asset" || exit 1
+      mv -f "$setup_dir/$asset" "$target" || exit 1
+    fi
   fi
   "$target" --version >/dev/null || exit 1
   printf '%s\n' "$target"
@@ -89,4 +119,8 @@ if [[ $# -gt 0 && "$1" != -* ]]; then
   }
   export TRANSCRIPT_DECK_YTDLP
 fi
-exec "$node_path" "$(dirname "$0")/transcript.mjs" "$@"
+if [[ "$temporary_cache" == true ]]; then
+  "$node_path" "$(dirname "$0")/transcript.mjs" "$@"
+else
+  exec "$node_path" "$(dirname "$0")/transcript.mjs" "$@"
+fi
