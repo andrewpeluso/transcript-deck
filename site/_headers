@@ -7,3 +7,7 @@
 
 /skill.md
   Content-Type: text/markdown; charset=utf-8
+
+/youtube-knowledge-base-starter.zip
+  Content-Type: application/zip
+  Content-Disposition: attachment; filename="youtube-knowledge-base-starter.zip"

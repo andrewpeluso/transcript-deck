@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Build a YouTube Knowledge Base for Your AI Agent</title>
+  <meta name="description" content="Build an AI knowledge base from YouTube transcripts. Organize trusted videos in Markdown and ask Codex or Claude Code for answers with timestamped sources.">
+  <meta name="theme-color" content="#161b18">
+  <meta property="og:title" content="How to Build a YouTube Knowledge Base for Your AI Agent">
+  <meta property="og:description" content="Turn videos you trust into a searchable Markdown library your AI agent can cite. Includes a downloadable starter kit.">
+  <meta property="og:type" content="article">
+  <!-- canonical -->
+  <!-- structured-data -->
+  <!-- analytics -->
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/main.js" defer></script>
+</head>
+<body>
+  <header class="shell top">
+    <a class="brand" href="/" aria-label="Transcript Deck home"><img src="/mark.svg" width="33" height="33" alt="">Transcript Deck</a>
+    <nav aria-label="Main"><a href="/#install">Try the skill</a><a href="/guides/youtube-knowledge-base/" aria-current="page">Library guide</a></nav>
+  </header>
+  <main class="shell">
+    <article>
+      <header class="guide-header">
+        <h1>How to build a YouTube knowledge base for your AI agent<span>.</span></h1>
+        <p class="guide-lede">Save transcripts from videos you trust as Markdown files, connect them with an index, and point your AI agent at the folder. Ask it to cite the exact moments behind its answers.</p>
+        <p class="byline">By <a href="https://andrewpeluso.com/">Andrew Peluso</a></p>
+      </header>
+      <div class="guide-layout">
+        <aside class="kit" aria-labelledby="kit-title">
+          <h2 id="kit-title">Knowledge base starter kit</h2>
+          <p>Unzip it, open the folder in your agent, and start with the example or add a video on your own topic.</p>
+          <ul class="file-list">
+            <li><code>index.md</code><span>The starting point for your agent</span></li>
+            <li><code>sample.md</code><span>A transcript with timestamp links</span></li>
+            <li><code>prompts.md</code><span>Prompts for adding videos and asking questions</span></li>
+          </ul>
+          <a class="button primary" href="/youtube-knowledge-base-starter.zip" download>Download starter ZIP</a>
+        </aside>
+        <div class="guide-content prose">
+          <section id="choose">
+            <h2>Start with a topic and a question</h2>
+            <p>I wanted to get better at naming YouTube videos, so I started saving advice from creators and strategists I trust. When I’m stuck, I can ask my agent what the sources say about the title I’m considering.</p>
+            <p>My library now covers hooks, thumbnails, and intros too. It includes <a href="https://www.youtube.com/watch?v=dAR3d6xnG0o">Paddy Galloway on titles and thumbnails</a>, and Aprilynne Alter’s videos on <a href="https://www.youtube.com/watch?v=0TolBiTrUg4">making a thumbnail</a> and <a href="https://www.youtube.com/watch?v=eRWyf-oDdCI">writing an intro</a>. When I find a channel I want to learn from, I start with the videos that answer questions I’m working on.</p>
+          </section>
+          <section id="save">
+            <h2>Save one transcript per video</h2>
+            <p>Make a folder for the topic. Use <a href="/#install">the Transcript Deck skill</a> in Codex or Claude Code with the first video URL, then ask your agent to save the resulting Markdown in that folder. Repeat for each video you want to add.</p>
+            <p>Keep the video title, creator, original URL, and publication date when available. Keep the timestamp links too. Those are what let you check the creator’s exact wording later.</p>
+          </section>
+          <section id="index">
+            <h2>Give your agent an index</h2>
+            <p>Use an <code>index.md</code> file to link to each transcript with a short description of what it covers. Ask the agent to read the index first, then open the files relevant to your question.</p>
+            <p>When you add a new transcript, update the index with its date and topic. YouTube changes over time, so I keep earlier sources and ask my agent to show where newer videos add to or disagree with them.</p>
+          </section>
+          <section id="ask">
+            <h2>Ask a question with sources</h2>
+            <p>Open the folder in your agent and give it a question. Ask it to link to the video and timestamp for each recommendation and say when the library doesn’t cover something.</p>
+            <div class="code-box"><code id="library-prompt">Read index.md, then open the transcripts relevant to my question. Cite the original video and timestamp for each recommendation. If sources disagree, tell me where. If the library doesn’t answer my question, say so. Here’s what I’m working on: [describe your project or paste your question].</code><button class="copy" type="button" data-copy="library-prompt" data-copy-message="Library prompt copied." aria-label="Copy knowledge base prompt">Copy</button></div>
+            <p id="copy-status" class="sr-only" role="status"></p>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer class="shell foot"><p>A personal project by <a href="https://andrewpeluso.com/">Andrew Peluso</a>.</p><a href="https://github.com/andrewpeluso/transcript-deck">Source and issues</a></footer>
+</body>
+</html>

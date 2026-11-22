@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Transcript Deck — YouTube to Markdown</title>
-  <meta name="description" content="Turn a YouTube link into a readable Markdown transcript with topic headings and timestamps. A free skill for Codex and Claude Code.">
+  <title>YouTube Transcript Skill for Codex &amp; Claude Code | Transcript Deck</title>
+  <meta name="description" content="Use this free YouTube transcript skill in Codex or Claude Code. Turn English YouTube captions into readable Markdown with topic headings and linked timestamps.">
   <meta name="theme-color" content="#161b18">
-  <meta property="og:title" content="Transcript Deck — YouTube to Markdown">
+  <meta property="og:title" content="YouTube Transcript Skill for Codex &amp; Claude Code | Transcript Deck">
   <meta property="og:description" content="A free skill for Codex and Claude Code. Turn YouTube captions into a Markdown file you can search, cite, and keep.">
   <meta property="og:type" content="website">
   <!-- canonical -->
+  <!-- structured-data -->
+  <!-- analytics -->
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
   <script src="/main.js" defer></script>
@@ -17,15 +19,15 @@
 <body>
   <header class="shell top">
     <a class="brand" href="/" aria-label="Transcript Deck home"><img src="/mark.svg" width="33" height="33" alt="">Transcript Deck</a>
-    <nav aria-label="Main"><a href="#install">Try it</a><a href="https://github.com/andrewpeluso/transcript-deck">GitHub</a></nav>
+    <nav aria-label="Main"><a href="#install">Try it</a><a href="/guides/youtube-knowledge-base/">Library guide</a></nav>
   </header>
   <main class="shell">
     <div class="hero">
       <div class="intro">
-        <h1>YouTube to<br class="desktop"> Markdown<span>.</span></h1>
-        <p>Turn a YouTube link into a readable transcript you can search and quote. Click a timestamp to jump back to the video.</p>
-        <div class="actions"><button class="button primary" type="button" data-copy="prompt">Copy starter prompt</button><a class="button outline" href="/sample.md" download>Download sample</a></div>
-        <p class="hero-hint">Paste it into Codex or Claude Code. Your agent handles setup.</p>
+        <h1>YouTube transcripts for your AI agent<span>.</span></h1>
+        <p>Transcript Deck is a free skill for Codex and Claude Code. It turns a YouTube link into a readable Markdown file with topic headings and timestamps that jump to the video.</p>
+        <div class="actions"><button class="button primary" type="button" data-copy="prompt" data-position="hero">Copy starter prompt</button><a class="button outline" href="/sample.md" download>Download sample</a></div>
+        <p class="hero-hint">Paste the prompt into your agent. It handles setup.</p>
       </div>
       <section id="example" class="example" aria-labelledby="example-title">
         <div class="example-top">
@@ -53,15 +55,42 @@
         <a class="skill-link" href="/skill.md">Read the skill instructions</a>
       </div>
       <div class="setup">
-        <div class="instruction"><h3>Paste into Codex or Claude Code</h3><div class="code-box"><code id="prompt">Use Transcript Deck (https://transcriptdeck.com/skill.md) to turn https://www.youtube.com/watch?v=q0VzUigrb_g into a Markdown file with timestamped sections. Run the setup if needed and give me the file.</code><button class="copy" type="button" data-copy="prompt" aria-label="Copy starter prompt text">Copy</button></div></div>
+        <div class="instruction"><h3>Paste into Codex or Claude Code</h3><div class="code-box"><code id="prompt">Use Transcript Deck (https://transcriptdeck.com/skill.md) to turn https://www.youtube.com/watch?v=q0VzUigrb_g into a Markdown file with timestamped sections. Run the setup if needed and give me the file.</code><button class="copy" type="button" data-copy="prompt" data-position="setup" aria-label="Copy starter prompt text">Copy</button></div></div>
         <p class="hint">Start with the example or replace the video link with your own. If captions are unavailable, share a caption file or paste the transcript.</p>
         <details><summary>Setup details and optional install</summary>
           <p>The starter prompt works in a local macOS or Linux workspace with shell and network access. Your agent may ask permission to download its tools the first time.</p>
           <p>For repeat use, install the skill with the Skills CLI.</p>
-          <div class="code-box"><code id="install-command">npx skills add andrewpeluso/transcript-deck --skill yt-structure</code><button class="copy" type="button" data-copy="install-command" aria-label="Copy optional install command">Copy</button></div>
+          <div class="code-box"><code id="install-command">npx skills add andrewpeluso/transcript-deck --skill yt-structure</code><button class="copy" type="button" data-copy="install-command" data-copy-message="Install command copied." aria-label="Copy optional install command">Copy</button></div>
         </details>
         <p id="copy-status" class="sr-only" role="status"></p>
       </div>
+    </section>
+    <section class="split" aria-labelledby="inbox-title">
+      <div>
+        <h2 class="section-title" id="inbox-title">How I used it to tackle my inbox</h2>
+        <p class="byline">Andrew Peluso, creator of Transcript Deck</p>
+      </div>
+      <div class="prose">
+        <p>When my inbox got cluttered, I found a few YouTube videos about managing email. I turned them into transcripts and gave those to my agent to help me decide what to change.</p>
+        <p>We started with <a href="https://www.youtube.com/watch?v=uXdEVeoGRRc">Tiago Forte’s approach</a>. The plan was to unsubscribe first, then filter the messages I still wanted to keep. I saved <a href="https://www.youtube.com/watch?v=oLdHnWLbn4A">Michael Mostert’s follow-up labels</a> as an option if I was losing track of messages that needed a response.</p>
+        <p>I felt more confident in the plan because I knew whose advice it drew from and could go back to the source.</p>
+      </div>
+    </section>
+    <section class="split" aria-labelledby="library-title">
+      <h2 class="section-title" id="library-title">Build a library you can return to</h2>
+      <div class="prose">
+        <p>I keep a collection of videos on YouTube titles, hooks, thumbnails, and intros. When I’m working on a title or learning something new from a channel I trust, I can ask my agent to work from those transcripts and show me the advice it used.</p>
+        <a class="button outline" href="/guides/youtube-knowledge-base/">Read the knowledge base guide</a>
+      </div>
+    </section>
+    <section class="split" aria-labelledby="answers-title">
+      <h2 class="section-title" id="answers-title">What to know before you start</h2>
+      <dl class="answers">
+        <div><dt>Which AI agents can use Transcript Deck?</dt><dd>Use Codex or Claude Code in a local workspace on macOS or Linux. Your agent needs access to a terminal and the internet.</dd></div>
+        <div><dt>What does the Markdown file include?</dt><dd>A transcript grouped under topic headings, with links to timestamps in the original video. You can read it, give it to your agent, or save it in a knowledge base.</dd></div>
+        <div><dt>Do I need to install anything first?</dt><dd>Start by pasting the prompt into your agent. It checks for the tools it needs and sets them up if they’re missing. It may ask permission to download them.</dd></div>
+        <div><dt>What if the video has no accessible English captions?</dt><dd>Give your agent a subtitle file or paste a transcript. Transcript Deck retrieves existing captions and can structure text you provide. It needs one of those text sources to work.</dd></div>
+      </dl>
     </section>
   </main>
   <footer class="shell foot"><p>A personal project by <a href="https://andrewpeluso.com/">Andrew Peluso</a>.</p><a href="https://github.com/andrewpeluso/transcript-deck">Source and issues</a></footer>
